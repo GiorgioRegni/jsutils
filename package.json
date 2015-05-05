@@ -1,0 +1,25 @@
+{
+  "name": "jsutils",
+  "version": "0.1.0",
+  "description": " common logging and error management functions ",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GiorgioRegni/jsutils.git"
+  },
+  "keywords": [
+    "node",
+    "javascript",
+    "log",
+    "error"
+  ],
+  "author": "Giorgio Regni",
+  "license": "Apache 2.0",
+  "bugs": {
+    "url": "https://github.com/GiorgioRegni/jsutils/issues"
+  },
+  "homepage": "https://github.com/GiorgioRegni/jsutils#readme"
+}

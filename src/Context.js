@@ -15,7 +15,7 @@ function LogCtx(name, logLvl) {
 	this.logger = new (winston.Logger)({
 		transports: [
 			new (winston.transports.Console)(),
-			new (winston.transports.File)({ filename: name+'.log' })
+			new (winston.transports.File)({ filename: name + '.log' })
 		]
 	});
 
@@ -28,10 +28,21 @@ function LogCtx(name, logLvl) {
 };
 
 LogCtx.prototype.newHit = function (id) {
+	id = id || gen_uniq_id();
 	return new Hit(this, id);
 };
 
 LogCtx.prototype.emit = function (hit, lvl, now, msg, o) {
 	this.lvl_to_winston[lvl](msg)
 };
+
+function gen_uniq_id() {
+	function s4() {
+		return Math.floor((1 + Math.random()) * 0x10000)
+			.toString(16)
+			.substring(1);
+	}
+	return s4() + s4();
+}
+  
 

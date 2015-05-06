@@ -9,7 +9,7 @@ module.exports = Hit;
 
 function Hit(appCtx, id) {
     this.ctx = appCtx; // Application context that this hit is attached to
-    this.id; // ID is a text that represents a unique identifier for a request
+    this.id = id; // ID is a text that represents a unique identifier for a request
     this.events = [];
     this.errorHappened = false;
     this.ts_start = Date.now();

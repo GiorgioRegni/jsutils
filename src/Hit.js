@@ -40,8 +40,6 @@ Hit.prototype.log = function (msg, o) {
     var now = Date.now();
     var lvl = Hit.LOG_LVL_NORM;
     
-    console.log(this.ctx.logLvl, lvl);
-
     if (this.ctx.logLvl >= lvl)
         this.ctx.emit(this, lvl, now, msg, o);
 

@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/GiorgioRegni/jsutils/issues"
   },
-  "homepage": "https://github.com/GiorgioRegni/jsutils#readme"
+  "homepage": "https://github.com/GiorgioRegni/jsutils#readme",
+  "dependencies": {
+    "winston": "^1.0.0"
+  }
 }

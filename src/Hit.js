@@ -12,38 +12,56 @@ function Hit(appCtx, id) {
     this.id; // ID is a text that represents a unique identifier for a request
     this.events = [];
     this.errorHappened = false;
-    this.ts_start= Date.now();
+    this.ts_start = Date.now();
 }
 
-Hit.prototype.LOG_LVL_DBG  = "debug";
-Hit.prototype.LOG_LVL_NORM = "norm";
-Hit.prototype.LOG_LVL_ERR  = "err";
+Hit.LOG_LVL_DBG = 5;
+Hit.LOG_LVL_NORM = 3;
+Hit.LOG_LVL_ERR = 1;
 
-Hit.prototype.done = function() {
+Hit.prototype.done = function () {
     this.ts_end = Date.now();
     // TODO report back to context
 };
 
-Hit.prototype.log = function(msg, o) {
+Hit.prototype.debug = function (msg, o) {
     o = o || {}; // o is an optional JSON object to be stored alongside message
-    
-    this.events.push({"msg": msg, o: o, ts: Date.now(), lvl: this.LOG_LVL_NORM});  
+    var now = Date.now();
+    var lvl = Hit.LOG_LVL_DBG;
+
+    if (this.ctx.logLvl >= lvl)
+        this.ctx.emit(this, lvl, now, msg, o);
+
+    this.events.push({ "msg": msg, o: o, ts: now, lvl: lvl });
 };
 
-Hit.prototype.error = function(msg, o) {
+Hit.prototype.log = function (msg, o) {
     o = o || {}; // o is an optional JSON object to be stored alongside message
+    var now = Date.now();
+    var lvl = Hit.LOG_LVL_NORM;
     
-    this.events.push({"msg": msg, o: o, ts: Date.now(), lvl: this.LOG_LVL_ERR});  
+    console.log(this.ctx.logLvl, lvl);
+
+    if (this.ctx.logLvl >= lvl)
+        this.ctx.emit(this, lvl, now, msg, o);
+
+    this.events.push({ "msg": msg, o: o, ts: now, lvl: lvl });
+};
+
+Hit.prototype.error = function (msg, o) {
+    o = o || {}; // o is an optional JSON object to be stored alongside message
+    var now = Date.now();
+    var lvl = Hit.LOG_LVL_ERR;
+    
+    if (this.ctx.logLvl >= lvl)
+        this.ctx.emit(this, lvl, now, msg, o);
+
+    this.events.push({ "msg": msg, o: o, ts: now, lvl: lvl });
+
     this.errorHappened = true;
 };
 
-Hit.prototype.debug = function(msg, o) {
-    o = o || {}; // o is an optional JSON object to be stored alongside message
-    
-    this.events.push({"msg": msg, o: o, ts: Date.now(), lvl: this.LOG_LVL_DBG});  
-};
-
-Hit.prototype.isError = function() {
+Hit.prototype.isError = function () {
     return this.errorHappened;
 };
 

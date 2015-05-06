@@ -38,7 +38,7 @@ LogCtx.prototype.newHit = function (id) {
 };
 
 LogCtx.prototype.emit = function (hit, lvl, now, msg, o) {
-	this.lvl_to_winston[lvl](msg)
+	this.lvl_to_winston[lvl](msg, o)
 };
 
 function gen_uniq_id() {
@@ -47,7 +47,7 @@ function gen_uniq_id() {
 			.toString(16)
 			.substring(1);
 	}
-	return s4() + s4();
+	return s4() + s4() + s4();
 }
   
 

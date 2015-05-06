@@ -14,7 +14,12 @@ function LogCtx(name, logLvl) {
 	this.history = [];
 	this.logger = new (winston.Logger)({
 		transports: [
-			new (winston.transports.Console)(),
+			new (winston.transports.Console)({
+				colorize: true,
+				level: "debug",
+				timestamp: true,
+				prettyPrint: true
+			}),
 			new (winston.transports.File)({ filename: name + '.log' })
 		]
 	});

@@ -25,37 +25,24 @@ Hit.prototype.done = function () {
 };
 
 Hit.prototype.debug = function (msg, o) {
-    o = o || {}; // o is an optional JSON object to be stored alongside message
+   // o is an optional JSON object to be stored alongside message
     var now = Date.now();
-    var lvl = Hit.LOG_LVL_DBG;
-
-    if (this.ctx.logLvl >= lvl)
-        this.ctx.emit(this, lvl, now, msg, o);
-
-    this.events.push({ "msg": msg, o: o, ts: now, lvl: lvl });
+    this.ctx.emitDebug(this, now, msg, o);
+     this.events.push({ "msg": msg, o: o, ts: now, lvl: Hit.LOG_LVL_DBG });
 };
 
 Hit.prototype.log = function (msg, o) {
-    o = o || {}; // o is an optional JSON object to be stored alongside message
+    // o is an optional JSON object to be stored alongside message
     var now = Date.now();
-    var lvl = Hit.LOG_LVL_NORM;
-    
-    if (this.ctx.logLvl >= lvl)
-        this.ctx.emit(this, lvl, now, msg, o);
-
-    this.events.push({ "msg": msg, o: o, ts: now, lvl: lvl });
+    this.ctx.emitInfo(this, now, msg, o);
+    this.events.push({ "msg": msg, o: o, ts: now, lvl: Hit.LOG_LVL_NORM });
 };
 
 Hit.prototype.error = function (msg, o) {
-    o = o || {}; // o is an optional JSON object to be stored alongside message
+    // o is an optional JSON object to be stored alongside message
     var now = Date.now();
-    var lvl = Hit.LOG_LVL_ERR;
-    
-    if (this.ctx.logLvl >= lvl)
-        this.ctx.emit(this, lvl, now, msg, o);
-
-    this.events.push({ "msg": msg, o: o, ts: now, lvl: lvl });
-
+    this.ctx.emitError(this, now, msg, o);
+    this.events.push({ "msg": msg, o: o, ts: now, lvl: Hit.LOG_LVL_ERR });
     this.errorHappened = true;
 };
 

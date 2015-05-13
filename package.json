@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/GiorgioRegni/jsutils#readme",
   "dependencies": {
-    "winston": "^1.0.0"
+    "bunyan": "^1.3.5"
   }
 }

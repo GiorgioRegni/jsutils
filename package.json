@@ -4,7 +4,7 @@
   "description": " common logging and error management functions ",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
   "homepage": "https://github.com/GiorgioRegni/jsutils#readme",
   "dependencies": {
     "bunyan": "^1.3.5"
-  }
+  },
+  "devDependencies": {
+   "mocha": "*"
+ }
 }

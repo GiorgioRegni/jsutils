@@ -18,19 +18,20 @@ function LogCtx(name, logLvl, showSrc) {
 	showSrc = showSrc || false;
 
 	this.logger = bunyan.createLogger({ name: name, src: showSrc, 
-	serializers: { req: bunyan.stdSerializers.req },
+//	serializers: { req: bunyan.stdSerializers.req },
 	streams: [{
+		level: 'info',
         path: "./"+name+'.log',
     },
 	{
-            level: 'info',
+            level: 'error',
             stream: process.stdout
-        },
-        {
-            level: 'trace',
-            type: 'raw',    // use 'raw' to get raw log record objects
-            stream: this.ringbuffer
         }
+//        ,{
+//            level: 'trace',
+//            type: 'raw',    // use 'raw' to get raw log record objects
+//            stream: this.ringbuffer
+//        }
 	]
 	 });
 };

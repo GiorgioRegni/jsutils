@@ -77,6 +77,10 @@ LogCtx.prototype.dumpTraces = function() {
 //	this.logger.debug({ req: hit.id }, o, msg);
 //};
 
+LogCtx.prototype.gen_uniq_id = function() {
+	return gen_uniq_id();	
+};
+
 function gen_uniq_id() {
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000)

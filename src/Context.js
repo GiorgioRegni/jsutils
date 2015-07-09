@@ -9,7 +9,7 @@ var bunyan = require("bunyan")
 
 module.exports = LogCtx;
 
-function LogCtx(name, level, showSrc) {
+function LogCtx(name, level, showSrc, dir) {
     this.name = name;
 	//this.logLvl = logLvl || Hit.LOG_LVL_NORM;
 	this.history = [];
@@ -17,12 +17,13 @@ function LogCtx(name, level, showSrc) {
 
 	showSrc = showSrc || false;
 	level = level || 'info';
+	dir = dir || './';
 
 	this.logger = bunyan.createLogger({ name: name, src: showSrc, 
 //	serializers: { req: bunyan.stdSerializers.req },
 	streams: [{
 		level: level,
-        path: "./"+name+'.log',
+        path: dir+name+'.log',
     },
 	{
             level: 'error',
